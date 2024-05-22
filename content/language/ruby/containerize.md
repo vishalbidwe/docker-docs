@@ -1,15 +1,14 @@
 ---
 title: Containerize a Ruby application
-keywords: Ruby, flask, containerize, initialize
+keywords: Ruby, webrick, containerize, initialize
 description: Learn how to containerize a Ruby application.
 aliases:
-  - /language/Ruby/build-images/
-  - /language/Ruby/run-containers/
+  - /language/ruby/build-images/
+  - /language/ruby/run-containers/
 ---
 
 ## Prerequisites
 
-* You have installed the latest version of [Docker Desktop](../../get-docker.md).
 * You have a [git client](https://git-scm.com/downloads). The examples in this section use a command-line based git client, but you can use any client.
 
 ## Overview
@@ -18,53 +17,22 @@ This section walks you through containerizing and running a Ruby application.
 
 ## Get the sample application
 
-The sample application uses the popular [Flask](https://flask.palletsprojects.com/) framework.
-
 Clone the sample application to use with this guide. Open a terminal, change directory to a directory that you want to work in, and run the following command to clone the repository:
 
 ```console
-$ git clone https://github.com/docker/Ruby-docker
+$ git clone https://github.com/vishalbidwe/ruby-docker.git
 ```
 
-## Initialize Docker assets
-
-Now that you have an application, you can use `docker init` to create the
-necessary Docker assets to containerize your application. Inside the
-`Ruby-docker` directory, run the `docker init` command. `docker init` provides
-some default configuration, but you'll need to answer a few questions about your
-application. For example, this application uses Flask to run. Refer to the
-following example to answer the prompts from `docker init` and use the same
-answers for your prompts.
-
-```console
-$ docker init
-Welcome to the Docker Init CLI!
-
-This utility will walk you through creating the following files with sensible defaults for your project:
-  - .dockerignore
-  - Dockerfile
-  - compose.yaml
-  - README.Docker.md
-
-Let's get started!
-
-? What application platform does your project use? Ruby
-? What version of Ruby do you want to use? 3.11.4
-? What port do you want your app to listen on? 5000
-? What is the command to run your app? Ruby3 -m flask run --host=0.0.0.0
-```
-
-You should now have the following contents in your `Ruby-docker`
+You should now have the following contents in your `ruby-docker`
 directory.
 
 ```text
-├── Ruby-docker/
-│ ├── app.py
-│ ├── requirements.txt
-│ ├── .dockerignore
+├── ruby-docker/
+│ ├── server.rb
+│ ├── Gemfile
+│ ├── Gemfile.lock
 │ ├── compose.yaml
 │ ├── Dockerfile
-│ ├── README.Docker.md
 │ └── README.md
 ```
 
@@ -75,30 +43,30 @@ To learn more about the files that `docker init` added, see the following:
 
 ## Run the application
 
-Inside the `Ruby-docker` directory, run the following command in a
+Inside the `ruby-docker` directory, run the following command in a
 terminal.
 
 ```console
 $ docker compose up --build
 ```
 
-Open a browser and view the application at [http://localhost:5000](http://localhost:5000). You should see a simple Flask application.
+Open a browser and view the application at [http://localhost:443](http://localhost:443). You should see a simple Ruby application.
 
 In the terminal, press `ctrl`+`c` to stop the application.
 
 ### Run the application in the background
 
 You can run the application detached from the terminal by adding the `-d`
-option. Inside the `Ruby-docker` directory, run the following command
+option. Inside the `ruby-docker` directory, run the following command
 in a terminal.
 
 ```console
 $ docker compose up --build -d
 ```
 
-Open a browser and view the application at [http://localhost:5000](http://localhost:5000).
+Open a browser and view the application at [http://localhost:443](http://localhost:443).
 
-You should see a simple Flask application.
+You should see a simple ruby application.
 
 In the terminal, run the following command to stop the application.
 
